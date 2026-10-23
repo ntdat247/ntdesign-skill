@@ -1,59 +1,71 @@
 ---
 name: ntdat-frontend-design
-description: Design and build high-craft, natural frontend interfaces without generic AI styling. Use when creating, styling, refactoring, or auditing web applications, dashboards, landing pages, or UI components where natural aesthetics, concise copywriting, physics-based motion, and modern web accessibility standards are required.
+description: Design and build high-craft, production-ready frontend interfaces without generic AI styling. Combines Anthropic's Design Thinking & End-to-End Execution, Taste-Skill's Anti-AI Aesthetics & Copywriting, Emil Kowalski's Motion Engineering, and Vercel's Web Design & Accessibility Guidelines. Use when creating, styling, refactoring, or auditing web applications, dashboards, landing pages, or UI components.
 ---
 # ntdat Frontend Design
 
-This skill combines editorial taste, fluid interaction engineering, and strict web accessibility standards into a unified frontend workflow. It avoids rigid templates that stifle creativity while deliberately steering clear of recognizable "AI-generated" layout clichés.
+This skill synthesizes the four strongest pillars of modern AI frontend engineering into a unified workflow while stripping away rigid template lock-in and recognizable "AI-generated" layout clichés:
+
+1. **Design Thinking & Holistic Execution (from Anthropic `frontend-design`):** Intentional aesthetic direction, atmospheric depth, and complete, self-contained, production-grade code execution across any domain.
+2. **Editorial Taste & Zero-Fluff Copywriting (from `taste-skill`):** Natural human visual rhythm, asymmetrical hierarchy, and direct, concrete microcopy without LLM marketing clichés.
+3. **Physics-Based Motion Engineering (from `emil-design-eng`):** Interruptible, origin-aware micro-interactions driven by custom spring physics and snappy easing curves.
+4. **Web Standards, Ergonomics & Accessibility (from Vercel `web-design-guidelines`):** Strict DOM semantics, keyboard-first operability, URL state synchronization, form ergonomics, and layout stability.
 
 ## When to Use
 
-- Designing or coding new web pages, dashboards, landing pages, or interactive UI components
+- Designing or coding new web applications, operational dashboards, landing pages, or interactive UI components from scratch
 - Refactoring existing interfaces to feel more polished, responsive, and human-crafted
-- Adding micro-interactions, transitions, or animations that feel physically grounded
-- Auditing frontend code for accessibility, keyboard navigation, and modern DOM best practices
+- Adding micro-interactions, state transitions, or animations that feel physically grounded
+- Auditing frontend code against Vercel's web interface guidelines, accessibility standards, and modern DOM best practices
 
 ## Core Pillars
 
-### 1. Aesthetic & Copywriting (Anti-AI Taste)
+### 1. Design Thinking & Execution Completeness (Anthropic `frontend-design` Core)
 
-Avoid default LLM visual tropes so the interface looks intentionally designed by a human rather than generated from a standard prompt.
+Before writing a single line of code, commit to a clear, domain-specific conceptual direction rather than defaulting to generic utility layouts:
 
-- **Eliminate AI visual clichés:** Avoid neon purple/indigo gradients on dark backgrounds, excessive glassmorphism, glowing orbs, and uniform 3-column bento/card grids with identical icon-title-paragraph structures.
-- **Asymmetry and visual hierarchy:** Use intentional whitespace, varied grid spans, and crisp 1px borders (`border-subtle`) instead of heavy drop shadows to separate content.
-- **High-contrast, editorial typography:** Pair distinct font weights and tight tracking (`-0.02em` to `-0.04em` on large headings) with comfortable reading widths (`60ch-70ch`) for body text. Use `tabular-nums` for all numeric data, tables, and metrics.
-- **Zero-fluff copywriting:** Ban generic marketing filler ("Unleash", "Revolutionize", "Elevate", "Seamless", "Next-Gen", "Empower"). Write direct, concrete labels and microcopy that state exactly what the feature does in as few words as possible.
+- **Intentional Aesthetic Direction:** Define the exact Purpose, Tone (e.g., *Utilitarian Industrial*, *Editorial Swiss Grid*, *High-Craft Dark UI*, *Warm Tactile Paper*), and a single Memorable Anchor element for the interface.
+- **Atmospheric Depth & Surface Craft:** Create depth through subtle surface layering (`surface-0`, `surface-1`, `surface-2`), crisp `1px` inner/outer borders, subtle noise/grain textures where appropriate, and deliberate negative space.
+- **Bespoke Typography & Color System:** Define cohesive CSS variables/tokens upfront. Avoid default browser or generic Tailwind blues/purples; establish a dominant neutral surface palette paired with a high-intent semantic accent.
+- **Zero-Placeholder Execution:** Never leave `// TODO`, incomplete tabs, or stubbed interactions. Deliver complete, working state logic, realistic domain data, and responsive layouts from the first render.
 
-### 2. Motion & Interaction Engineering
+### 2. Anti-AI Taste & Copywriting (`taste-skill` Core)
 
-Animations should reinforce spatial relationships and make the interface feel responsive, never slow down the user.
+Eliminate default LLM visual and verbal tropes so the interface looks crafted by a senior product designer:
 
-- **Physics and custom easing:** Never use linear or default `ease-in-out` for UI state changes. Use snappy ease-out curves (`cubic-bezier(0.22, 1, 0.36, 1)` or `cubic-bezier(0.16, 1, 0.3, 1)`) for entrances and subtle spring physics for interactive elements.
-- **Speed and interruptibility:** Keep micro-interactions between `120ms` and `250ms`. Animations must be interruptible and only animate compositor-friendly properties (`transform`, `opacity`, `clip-path`).
-- **Tactile feedback:** Apply subtle scale-down feedback (`scale(0.98)`) on active button presses. Ensure popovers, dropdowns, and modals scale from their trigger origin (`transform-origin`) rather than the center of the screen.
-- **Respect user preferences:** Always wrap non-essential motion in `@media (prefers-reduced-motion: no-preference)` or provide instant state transitions when reduced motion is enabled.
+- **Ban AI Visual Clichés:** Strictly avoid neon purple/indigo/cyan glowing gradients on dark backgrounds, excessive glassmorphism, floating decorative blobs, and uniform 3-column bento/card grids with identical `icon + heading + 2-line paragraph` structures.
+- **Asymmetry & Structural Variety:** Use varied grid spans (e.g., 8/4 or 7/5 splits), inline key-value strips, dense data tables, and crisp `1px` hairlines (`border-subtle`) instead of heavy drop shadows to separate content.
+- **Editorial Typography:** Pair distinct font weights and tight tracking (`-0.02em` to `-0.04em` on display headings) with comfortable reading widths (`60ch-70ch`) for prose. Always apply `font-variant-numeric: tabular-nums` (`tabular-nums`) to numeric columns, counters, live telemetry, and timestamps.
+- **Zero-Fluff Copywriting:** Ban generic AI marketing filler (*"Unleash"*, *"Revolutionize"*, *"Elevate"*, *"Seamless"*, *"Next-Gen"*, *"Empower"*, *"Supercharge"*). Write direct, concrete labels, button verbs, and microcopy that state exactly what the system does in as few words as possible.
 
-### 3. Web Standards & Accessibility
+### 3. Motion & Interaction Engineering (`emil-design-eng` Core)
 
-Ensure every component behaves like a rock-solid native application under real-world usage.
+Animations must reinforce spatial relationships and make the interface feel fast and responsive, never decorative or sluggish:
 
-- **Semantic HTML & Keyboard first:** Use native elements (`<button>`, `<dialog>`, `<nav>`, `<main>`) before reaching for custom `<div>` wrappers. Every interactive element must have a visible `:focus-visible` ring and full keyboard operability (`Tab`, `Enter`, `Space`, `Escape`).
-- **Hit targets and layout stability:** Keep interactive hit areas at least `44x44px` on touch devices (using padding or pseudo-elements if the visual icon is smaller). Prevent Cumulative Layout Shift (CLS) by reserving explicit dimensions or aspect ratios for images, skeletons, and async data.
-- **Complete UI states:** Never ship only the "happy path". Explicitly handle and style `empty`, `loading`, `error`, `disabled`, and `overflow` (long text truncation with `text-overflow: ellipsis` or `min-w-0` in flex/grid containers) states.
-- **URL and form ergonomics:** Sync meaningful filter, tab, or modal states with URL search params where appropriate. Ensure form inputs have proper `label` associations, `autocomplete` attributes, and inline validation feedback.
+- **Custom Easing & Spring Physics:** Never use `linear` or default `ease-in-out` for UI state changes. Use snappy custom ease-out curves (`cubic-bezier(0.22, 1, 0.36, 1)` or `cubic-bezier(0.16, 1, 0.3, 1)`) for drawers, modals, and entrances, and subtle spring physics for interactive drags or toggles.
+- **Fast & Interruptible:** Keep micro-interactions between `120ms` and `240ms`. Animations must be interruptible mid-flight and only animate compositor-friendly properties (`transform`, `opacity`, `clip-path`).
+- **Origin-Aware & Tactile Feedback:** Apply subtle scale-down feedback (`active:scale-[0.98]`) on interactive buttons. Ensure popovers, tooltips, dropdowns, and menus scale from their trigger origin (`transform-origin`) rather than the center of the viewport.
+- **Reduced Motion Compliance:** Always respect `@media (prefers-reduced-motion: reduce)` by disabling spatial movement/scaling and falling back to instant or simple opacity transitions.
+
+### 4. Web Standards, Accessibility & Ergonomics (Vercel `web-design-guidelines` Core)
+
+Ensure every component behaves like a resilient, production-grade native web application:
+
+- **Semantic HTML & Keyboard-First Navigation:** Use native elements (`<button>`, `<dialog>`, `<nav>`, `<main>`, `<table>`) before custom `<div>` wrappers. Every interactive control must have a crisp `:focus-visible` ring and full keyboard operability (`Tab`, `Shift+Tab`, `Enter`, `Space`, `Escape`, and arrow keys for menus/tabs). Icon-only buttons require explicit `aria-label`.
+- **Hit Targets & Layout Stability (Zero CLS):** Keep interactive touch targets at least `44x44px` on mobile/touch devices. Prevent Cumulative Layout Shift (CLS) by reserving explicit dimensions, `aspect-ratio`, or skeleton placeholders for images and async data, and keep dynamic numeric readouts width-stable.
+- **Defensive CSS & Complete UI States:** Explicitly design and handle `empty`, `loading` (skeletons/spinners), `error` (with recovery action), `disabled`, and `overflow` states. Prevent broken flex/grid layouts from long user strings using `min-w-0`, `truncate` (`text-overflow: ellipsis`), and `break-words`.
+- **Form, Input & URL Ergonomics:** Every input requires an associated `<label>`, appropriate `type` / `inputmode`, `autocomplete`, and inline error feedback that does not shift layout. Sync meaningful view states (active tabs, filters, search queries, sort order) with URL query parameters or deterministic state. Use proper typographic characters (`…` for loading/truncation, curly quotes, non-breaking spaces for units like `10 MB` or `24 ms`).
 
 ## Workflow Steps
 
-1. **Establish the Aesthetic Direction:** Before writing code, pick a cohesive color palette (neutral surface tones with a single deliberate accent color) and typographic scale suited to the domain (e.g., dense and utilitarian for dashboards/tools, spacious and editorial for product pages).
-2. **Draft Structure & Copy:** Build the semantic DOM layout using realistic, concise copy and domain-accurate sample data instead of `Lorem ipsum` or repetitive placeholder cards.
-3. **Layer Micro-Interactions:** Add hover, focus, active, and transition states using custom easing curves and origin-aware transforms.
-4. **Run the Quality & A11y Pass:** Verify contrast ratios, keyboard focus rings, text overflow handling (`min-w-0`, `truncate`), `tabular-nums` on numbers, and reduced-motion fallbacks before finalizing the code.
+1. **Formulate Aesthetic & Architecture Plan (Anthropic):** Define the domain tone, surface palette, typographic scale, and layout topology before coding.
+2. **Build Semantic Structure & Concrete Copy (Taste + Vercel):** Construct accessible semantic DOM using realistic domain data, concise microcopy, and defensive flex/grid truncation (`min-w-0`, `tabular-nums`).
+3. **Engineer Fluid Interactions (Emil):** Layer origin-aware transitions, custom `cubic-bezier` easing curves, tactile press states (`scale(0.98)`), and keyboard shortcuts.
+4. **Execute Vercel Quality & A11y Audit:** Verify `:focus-visible` rings, `aria-label` on icon buttons, hit target sizes, `empty`/`loading`/`error` state coverage, and `prefers-reduced-motion` fallbacks.
 
 ## Pre-Delivery Audit Checklist
 
-- [ ] No neon purple/indigo AI gradients or generic 3-column icon-card grids
-- [ ] All numeric metrics, counters, and tables have `font-variant-numeric: tabular-nums`
-- [ ] Interactive transitions use custom `cubic-bezier` or spring physics (`120ms-250ms`)
-- [ ] Buttons include tactile press feedback (`active:scale-[0.98]`)
-- [ ] Full keyboard navigation (`Tab`, `Escape`, `:focus-visible`) works across all controls
-- [ ] `empty`, `loading`, `error`, and text-overflow (`min-w-0` / `truncate`) states are handled
+- [ ] **Anthropic Holistic Craft:** Cohesive aesthetic direction, layered surface tokens, and 100% functional interactive states (no placeholders or `TODO`s).
+- [ ] **Taste Anti-AI Check:** Zero neon purple/indigo AI gradients, zero generic 3-column icon cards, and zero marketing filler words.
+- [ ] **Emil Motion Check:** Transitions use `cubic-bezier(0.22, 1, 0.36, 1)` (`120ms-240ms`), buttons use `active:scale-[0.98]`, and popovers use accurate `transform-origin`.
+- [ ] **Vercel Guidelines Check:** All metrics use `tabular-nums`, flex children use `min-w-0`/`truncate`, icon buttons have `aria-label`, keyboard navigation (`Tab`/`Escape`/`:focus-visible`) is complete, and `empty`/`loading`/`error` states are built.

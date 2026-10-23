@@ -9,4 +9,4 @@ Combines editorial taste (`taste-skill`), physics-based motion engineering (`emi
 Install across all your coding agents with a single command:
 
 ```bash
-npx skills add ntdesign/skill
+npx skills add ntdat247/ntdesign-skill

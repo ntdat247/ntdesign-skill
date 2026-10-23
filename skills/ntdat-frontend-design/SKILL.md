@@ -1,5 +1,5 @@
 ---
-name: craft-frontend-design
+name: ntdat-frontend-design
 description: Design and build high-craft, natural frontend interfaces without generic AI styling. Use when creating, styling, refactoring, or auditing web applications, dashboards, landing pages, or UI components where natural aesthetics, concise copywriting, physics-based motion, and modern web accessibility standards are required.
 ---
 # ntdat Frontend Design

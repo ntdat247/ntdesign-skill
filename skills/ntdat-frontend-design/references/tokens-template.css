@@ -1,0 +1,222 @@
+/* =====================================================================
+   Design Token Template — copy, then swap the brand hues
+   Battle-tested on operational dashboards. Works with Tailwind v3
+   (hsl(var(--x) / <a>)) and v4 (@theme) — see the Tailwind bridge at
+   the bottom of this file.
+
+   How to adapt:
+   1. Replace the "Brand" section with the product's identity ramp.
+   2. Keep every other section's STRUCTURE — names are the contract
+      components code against. Only tune values.
+   3. Delete `planned` if the domain has no scheduled/future state;
+      rename it if it does. Never add a 7th status without a reason —
+      fewer hues = calmer screen (see "Color Budget", SKILL.md Pillar 5).
+   ===================================================================== */
+
+:root {
+  /* ---------- Brand (identity ramp — swap these, use ONLY for
+         logo / ribbon / primary action / active nav) ---------- */
+  --brand-accent-50:  358 86% 97%;
+  --brand-accent-100: 358 93% 94%;
+  --brand-accent-500: 358 78% 50%;   /* fill: buttons, active nav */
+  --brand-accent-600: 358 80% 44%;   /* hover */
+  --brand-accent-700: 358 81% 37%;   /* active / pressed */
+
+  /* ---------- Surfaces & text ----------
+     NEUTRAL TEMPERATURE is a deliberate choice — swap the WHOLE set, never
+     mix hues. Default below is COOL (technical/ops/finance). Alternatives:
+
+     PURE (minimal/editorial/luxury — let the accent do all the work):
+       --background: 220 14% 98%;  --foreground: 224 15% 11%;
+       --muted: 220 14% 96%;      --muted-foreground: 220 9% 40%;
+       --subtle-foreground: 220 7% 47%;
+       --border: 220 13% 90%;     --border-strong: 220 9% 80%;
+       --input: 220 13% 85%;
+
+     WARM (hospitality/food/content/consumer, hue 25–35):
+       --background: 30 20% 98%;  --foreground: 25 25% 12%;
+       --muted: 30 15% 96%;      --muted-foreground: 25 10% 40%;
+       --subtle-foreground: 25 8% 47%;
+       --border: 28 14% 90%;     --border-strong: 28 11% 80%;
+       --input: 28 14% 85%;
+
+     For the .dark pair, shift its neutrals the same way
+     (cool ~222 / pure ~220 @ low sat / warm ~28). */
+  --background: 210 28% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --muted: 210 25% 96%;
+  --muted-foreground: 215 19% 40%;   /* AA on background at 12px */
+  --subtle-foreground: 215 16% 47%;  /* captions only, >= 13px */
+  --border: 214 28% 90%;
+  --border-strong: 214 22% 80%;
+  --input: 214 28% 85%;
+
+  /* ---------- Interactive ----------
+     primary-text is a SEPARATE shade retuned for AA when the accent
+     is used as text (a fill shade is too light/dark as text). */
+  --primary: var(--brand-accent-500);
+  --primary-hover: var(--brand-accent-600);
+  --primary-active: var(--brand-accent-700);
+  --primary-foreground: 0 0% 100%;
+  --primary-text: 358 80% 44%;
+  --secondary: 210 30% 96%;
+  --secondary-foreground: 215 25% 24%;
+  --accent: 210 30% 96%;             /* selected-row tint, subtle emphasis */
+  --accent-foreground: 215 25% 24%;
+
+  /* Focus ring: its OWN hue — never the brand accent, never the error
+     color, so focus can't be misread as "primary" or "error". */
+  --ring: 217 91% 50%;
+  --link: 222 47% 11%;               /* links are ink + underline, not brand */
+
+  /* ---------- Status (semantic; three tokens each: text / surface / border).
+         Always pair with icon + text label — never color alone. ---------- */
+  --success: 160 84% 26%;  --success-surface: 152 76% 96%; --success-border: 152 76% 80%;
+  --warning: 26 90% 37%;   --warning-surface: 48 100% 96%;  --warning-border: 48 97% 77%;
+  --danger:  0 74% 42%;    --danger-surface:  0 86% 97%;    --danger-border:  0 93% 85%;
+  --info:    224 76% 48%;  --info-surface:    214 100% 97%; --info-border:    213 97% 87%;
+  --planned: 263 70% 50%;  --planned-surface: 270 100% 98%; --planned-border: 269 97% 85%;
+  --unknown: 215 19% 40%;  --unknown-surface: 210 25% 96%;  --unknown-border: 214 28% 85%;
+
+  /* ---------- Typography ----------
+     Sans = every word. Mono = IDs, codes, numbers only — never mono for
+     body copy (scannability collapses). House sans: Fira Sans — humanist
+     grotesque with full Vietnamese diacritics; pair with JetBrains Mono
+     (Fira Code lacks the Vietnamese subset). Load in the entry stylesheet:
+       @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+     or next/font: Fira_Sans({ subsets:['latin','latin-ext','vietnamese'] }).
+     Swap only when the product's brand demands its own typeface — then
+     verify diacritic coverage for every UI language. */
+  --font-sans: "Fira Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  /* scale (rem @16px) — nothing below 12px in the UI */
+  --text-caption: 0.75rem;   /* 12 / 16  labels, meta, badges */
+  --text-body-sm: 0.8125rem; /* 13 / 20  dense tables ONLY */
+  --text-body:    0.875rem;  /* 14 / 20  default UI text */
+  --text-body-lg: 1rem;      /* 16 / 24  long-form, mobile body */
+  --text-title:   1.125rem;  /* 18 / 28  card / section title */
+  --text-heading: 1.5rem;    /* 24 / 32  page title (h1) */
+  --text-display: 2rem;      /* 32 / 40  KPI numbers, hero */
+
+  /* ---------- Shape, depth, motion ---------- */
+  --radius: 0.75rem;     /* 12 cards, panels   */
+  --radius-md: 0.5rem;   /*  8 buttons, inputs */
+  --radius-sm: 0.375rem; /*  6 badges, chips   */
+  --shadow-xs: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  --shadow-sm: 0 1px 3px 0 rgb(15 23 42 / 0.07), 0 1px 2px -1px rgb(15 23 42 / 0.07);
+  --shadow-md: 0 4px 14px 0 rgb(15 23 42 / 0.07), 0 2px 4px 0 rgb(15 23 42 / 0.04);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ---------- Layout ---------- */
+  --header-height: 3.5rem;   /* 56 — same in every screen of the product */
+  --container-content: 80rem;/* 1280 forms / dashboards */
+  --touch-target: 2.75rem;   /* 44 on coarse pointers */
+  --control-height: 2.25rem; /* 36 on fine pointers */
+}
+
+.dark {
+  --background: 224 40% 6.5%;
+  --foreground: 210 35% 98%;
+  --card: 224 35% 10%;
+  --card-foreground: 210 35% 98%;
+  --popover: 224 35% 10%;
+  --popover-foreground: 210 35% 98%;
+  --muted: 222 28% 15%;
+  --muted-foreground: 215 20% 70%;
+  --subtle-foreground: 215 16% 58%;
+  --border: 222 26% 18%;
+  --border-strong: 222 20% 28%;
+  --input: 222 26% 22%;
+  --primary: 358 78% 50%;
+  --primary-hover: 358 80% 56%;
+  --primary-active: 358 80% 44%;
+  --primary-text: 358 90% 68%;      /* lighter shade for text on dark */
+  --secondary: 222 28% 15%;
+  --secondary-foreground: 210 35% 98%;
+  --accent: 222 28% 15%;
+  --accent-foreground: 210 35% 98%;
+  --ring: 213 94% 68%;
+  --link: 210 35% 98%;
+  --success: 142 69% 58%; --success-surface: 160 84% 8%;  --success-border: 160 60% 20%;
+  --warning: 43 96% 56%;  --warning-surface: 30 80% 9%;   --warning-border: 32 70% 22%;
+  --danger:  0 91% 71%;   --danger-surface:  0 63% 10%;   --danger-border:  0 60% 24%;
+  --info:    213 94% 68%; --info-surface:    224 64% 11%; --info-border:    224 55% 26%;
+  --planned: 255 92% 76%; --planned-surface: 263 60% 11%; --planned-border: 263 45% 28%;
+  --unknown: 215 20% 65%; --unknown-surface: 222 28% 13%; --unknown-border: 222 26% 22%;
+}
+
+/* Coarse pointer (tablets, touch, gloves): controls grow to the 44px
+   touch target everywhere — one switch, whole product adapts. */
+@media (pointer: coarse) {
+  :root { --control-height: var(--touch-target); }
+}
+
+/* Reduced motion collapses to instant AT THE TOKEN LAYER — every
+   `transition-duration: var(--duration-*)` consumer follows for free. */
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration-fast: 0ms; --duration-base: 0ms; }
+}
+
+/* Base layer wiring (Tailwind v3 example):
+   body { @apply bg-background text-body text-foreground font-sans antialiased; }
+   .font-mono { font-variant-numeric: tabular-nums; }
+
+   =====================================================================
+   Tailwind v3 bridge (tailwind.config.js) — maps tokens to utilities
+   (text-caption, h-control, duration-fast, bg-danger-surface, ...)
+   =====================================================================
+   const c = (v) => `hsl(var(--${v}) / <alpha-value>)`;
+   const status = (n) => ({ DEFAULT: c(n), surface: c(`${n}-surface`), border: c(`${n}-border`) });
+   module.exports = {
+     darkMode: "class",
+     theme: { extend: {
+       colors: {
+         background: c("background"), foreground: c("foreground"),
+         card: { DEFAULT: c("card"), foreground: c("card-foreground") },
+         popover: { DEFAULT: c("popover"), foreground: c("popover-foreground") },
+         muted: { DEFAULT: c("muted"), foreground: c("muted-foreground") },
+         subtle: { foreground: c("subtle-foreground") },
+         border: { DEFAULT: c("border"), strong: c("border-strong") },
+         input: c("input"), ring: c("ring"), link: c("link"),
+         primary: { DEFAULT: c("primary"), hover: c("primary-hover"), active: c("primary-active"),
+                    text: c("primary-text"), foreground: c("primary-foreground") },
+         secondary: { DEFAULT: c("secondary"), foreground: c("secondary-foreground") },
+         accent: { DEFAULT: c("accent"), foreground: c("accent-foreground") },
+         success: status("success"), warning: status("warning"),
+         danger: status("danger"),   info: status("info"),
+         planned: status("planned"), unknown: status("unknown"),
+         brand: { 50: c("brand-accent-50"), 100: c("brand-accent-100"), 500: c("brand-accent-500"),
+                  600: c("brand-accent-600"), 700: c("brand-accent-700") },
+       },
+       fontFamily: { sans: ["var(--font-sans)"], mono: ["var(--font-mono)"] },
+       fontSize: {
+         caption:  ["var(--text-caption)",  { lineHeight: "1rem" }],
+         "body-sm": ["var(--text-body-sm)", { lineHeight: "1.25rem" }],
+         body:      ["var(--text-body)",    { lineHeight: "1.25rem" }],
+         "body-lg": ["var(--text-body-lg)", { lineHeight: "1.5rem" }],
+         title:     ["var(--text-title)",   { lineHeight: "1.75rem", fontWeight: "600" }],
+         heading:   ["var(--text-heading)", { lineHeight: "2rem", fontWeight: "700", letterSpacing: "-0.015em" }],
+         display:   ["var(--text-display)", { lineHeight: "2.5rem", fontWeight: "700", letterSpacing: "-0.02em" }],
+       },
+       borderRadius: { lg: "var(--radius)", md: "var(--radius-md)", sm: "var(--radius-sm)" },
+       boxShadow: { xs: "var(--shadow-xs)", sm: "var(--shadow-sm)", md: "var(--shadow-md)" },
+       transitionDuration: { fast: "var(--duration-fast)", base: "var(--duration-base)" },
+       transitionTimingFunction: { standard: "var(--ease-standard)" },
+       height: { header: "var(--header-height)", control: "var(--control-height)", touch: "var(--touch-target)" },
+       minHeight: { control: "var(--control-height)", touch: "var(--touch-target)" },
+       minWidth: { touch: "var(--touch-target)" },
+       maxWidth: { content: "var(--container-content)" },
+     } },
+   };
+
+   Tailwind v4: same variables under `@theme { --color-primary: hsl(var(--primary)); ... }`.
+
+   Chart categorical palettes do NOT live here — keep series colors as
+   constants next to the chart code (SVG-only), so status tokens and
+   data-viz hues never bleed into each other. */
